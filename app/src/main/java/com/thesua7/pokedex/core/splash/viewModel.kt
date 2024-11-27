@@ -21,11 +21,12 @@ class SplashViewModel @Inject constructor(
 
     fun checkAuthStatus() {
         viewModelScope.launch {
-            splashState = if (prefDataSource.isLoggedIn()) {
-                SplashState.NavigateToHome
-            } else {
-                SplashState.NavigateToAuth
-            }
+//            splashState = if (prefDataSource.isLoggedIn()) {
+//                SplashState.NavigateToHome
+//            } else {
+//                SplashState.NavigateToAuth
+//            }
+            splashState = SplashState.NavigateToHome
         }
     }
 }

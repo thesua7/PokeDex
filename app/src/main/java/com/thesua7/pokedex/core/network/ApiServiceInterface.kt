@@ -1,7 +1,7 @@
 package com.thesua7.pokedex.core.network
 
-import com.thesua7.pokedex.features.data.model.response.pokemon.PokemonResponse
-import com.thesua7.pokedex.features.data.model.response.pokemonList.PokemonListResponse
+import com.thesua7.pokedex.features.pokemonDetail.data.model.dto.PokemonResponse
+import com.thesua7.pokedex.features.pokemonList.data.model.dto.PokemonListResponse
 
 import retrofit2.Response
 import retrofit2.http.GET

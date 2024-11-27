@@ -8,9 +8,12 @@ import com.thesua7.pokedex.core.network.ApiInterceptor
 import com.thesua7.pokedex.core.network.ApiServiceInterface
 import com.thesua7.pokedex.core.resources.NetworkInfo
 import com.thesua7.pokedex.core.resources.SnackBarManager
-import com.thesua7.pokedex.features.data.repository.DataRepository
-import com.thesua7.pokedex.features.data.source.remote.RemoteDataSource
-import com.thesua7.pokedex.features.domain.repository.PokeDexRepository
+import com.thesua7.pokedex.features.pokemonDetail.data.repository.PokemonDetailDataRepository
+import com.thesua7.pokedex.features.pokemonDetail.data.source.PokemonDetailRemoteDataSource
+import com.thesua7.pokedex.features.pokemonDetail.domain.repository.PokemonDetailRepository
+import com.thesua7.pokedex.features.pokemonList.data.repository.PokemonListDataRepository
+import com.thesua7.pokedex.features.pokemonList.data.source.PokemonListRemoteDataSource
+import com.thesua7.pokedex.features.pokemonList.domain.repository.PokemonListRepository
 import com.thesua7.pokedex.features.utils.Constants
 import dagger.Module
 import dagger.Provides
@@ -41,8 +44,7 @@ object AppModule {
     @Provides
     @Singleton // // Creates and provides a Retrofit instance also add the token to API requests
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
-        return Retrofit.Builder()
-            .baseUrl(Constants.BASE_URL)  // Base URL for all API requests
+        return Retrofit.Builder().baseUrl(Constants.BASE_URL)  // Base URL for all API requests
             .client(okHttpClient)  // Pass the OkHttpClient with token interception to Retrofit
             .addConverterFactory(GsonConverterFactory.create())  // Convert API response to objects using Gson
             .build()
@@ -95,11 +97,20 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun providePokeDexRepository(
-        remoteDataSource: RemoteDataSource
-    ): PokeDexRepository {
-        return DataRepository(remoteDataSource)
+    fun providePokemonListRepository(
+        pokemonListRemoteDataSource: PokemonListRemoteDataSource
+    ): PokemonListRepository {
+        return PokemonListDataRepository(pokemonListRemoteDataSource)
     }
+
+    @Provides
+    @Singleton
+    fun providePokemonDetailsRepository(
+        pokemonListRemoteDataSource: PokemonDetailRemoteDataSource
+    ): PokemonDetailRepository {
+        return PokemonDetailDataRepository(pokemonListRemoteDataSource)
+    }
+
 
 //    @Provides
 //    @Singleton // provide to future repos like this

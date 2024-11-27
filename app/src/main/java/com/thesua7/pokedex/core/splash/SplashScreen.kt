@@ -20,7 +20,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(
-    onNavigateToAuth: () -> Unit,
+    onNavigateToAuth: (() -> Unit)?,
     onNavigateToHome: () -> Unit,
     viewModel: SplashViewModel = hiltViewModel()
 ) {
@@ -46,7 +46,9 @@ fun SplashScreen(
     // Observe navigation state and navigate when ready
     LaunchedEffect(viewModel.splashState) {
         when (viewModel.splashState) {
-            is SplashState.NavigateToAuth -> onNavigateToAuth()
+            is SplashState.NavigateToAuth -> if (onNavigateToAuth != null) {
+                onNavigateToAuth()
+            }
             is SplashState.NavigateToHome -> onNavigateToHome()
             SplashState.Loading -> { /* No-op */
             }

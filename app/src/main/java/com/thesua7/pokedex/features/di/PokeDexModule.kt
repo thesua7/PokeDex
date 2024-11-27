@@ -1,8 +1,9 @@
 package com.thesua7.pokedex.features.di
 
-import com.thesua7.pokedex.features.domain.repository.PokeDexRepository
-import com.thesua7.pokedex.features.domain.useCase.PokemonListUseCase
-import com.thesua7.pokedex.features.domain.useCase.PokemonUseCase
+import com.thesua7.pokedex.features.pokemonDetail.domain.repository.PokemonDetailRepository
+import com.thesua7.pokedex.features.pokemonList.domain.repository.PokemonListRepository
+import com.thesua7.pokedex.features.pokemonList.domain.usecase.PokemonListUseCase
+import com.thesua7.pokedex.features.pokemonDetail.domain.usecase.PokemonDetailUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,12 +15,14 @@ object PokeDexModule {
 
 
     @Provides
-    fun providePokemonListUseCase(pokeDexRepository: PokeDexRepository):PokemonListUseCase{
-        return PokemonListUseCase(pokeDexRepository)
+    fun providePokemonListUseCase(pokemonListRepository: PokemonListRepository): PokemonListUseCase {
+        return PokemonListUseCase(pokemonListRepository)
     }
 
     @Provides
-    fun providePokemonUseCase(pokeDexRepository: PokeDexRepository):PokemonUseCase{
-        return PokemonUseCase(pokeDexRepository)
+    fun providePokemonDetailUseCase(pokemonDetailsRepository: PokemonDetailRepository): PokemonDetailUseCase {
+        return PokemonDetailUseCase(pokemonDetailsRepository)
     }
+
+
 }
